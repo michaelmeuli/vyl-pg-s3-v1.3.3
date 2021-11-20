@@ -40,11 +40,11 @@ export const config: VendureConfig = {
         type: 'postgres',
         synchronize: true, // turn this off for production
         logging: false,
-        database: 'vyl-pg-s3-v1.3.3',
-        host: 'localhost',
+        database: 'sygfwnlc',
+        host: 'abul.db.elephantsql.com',
         port: 5432,
-        username: 'postgres',
-        password: <string>process.env.DB_PASSWORD,
+        username: 'sygfwnlc',
+        password: <string>process.env.ELEPHANTSQL_PASSWORD,
         migrations: [path.join(__dirname, '../migrations/*.ts')],
     },
     paymentOptions: {
