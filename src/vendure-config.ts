@@ -40,12 +40,13 @@ export const config: VendureConfig = {
         type: 'postgres',
         synchronize: true, // turn this off for production
         logging: false,
-        database: 'inxsleby',
+        database: 'dgnmytsn',
         host: 'abul.db.elephantsql.com',
         port: 5432,
-        username: 'inxsleby',
+        username: 'dgnmytsn',
         password: <string>process.env.ELEPHANTSQL_PASSWORD,
         migrations: [path.join(__dirname, '../migrations/*.ts')],
+        extra: { max: 2 }
     },
     paymentOptions: {
         paymentMethodHandlers: [dummyPaymentHandler],
