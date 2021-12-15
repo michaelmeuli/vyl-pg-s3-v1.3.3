@@ -8,6 +8,8 @@ import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin, configureS3AssetStorage } from '@vendure/asset-server-plugin';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import path from 'path';
+import { SwissQrInvoicePlugin } from './plugins/swiss-qr-invoice/swiss-qr-invoice-plugin';
+
 
 export const config: VendureConfig = {
     apiOptions: {
@@ -94,5 +96,6 @@ export const config: VendureConfig = {
             route: 'admin',
             port: 3002,
         }),
+        SwissQrInvoicePlugin
     ],
 };
