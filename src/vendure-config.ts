@@ -1,12 +1,12 @@
 import {
     dummyPaymentHandler,
-    DefaultJobQueuePlugin,
     DefaultSearchPlugin,
     VendureConfig,
 } from '@vendure/core';
 import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin, configureS3AssetStorage } from '@vendure/asset-server-plugin';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
+import { BullMQJobQueuePlugin } from '@vendure/job-queue-plugin/package/bullmq';
 import path from 'path';
 import { SwissQrInvoicePlugin } from './plugins/swiss-qr-invoice/swiss-qr-invoice-plugin';
 
@@ -66,7 +66,13 @@ export const config: VendureConfig = {
                 },
               }),
         }),
-        DefaultJobQueuePlugin.init({ useDatabaseForBuffer: true }),
+        BullMQJobQueuePlugin.init({ 
+            connection: {
+                host: "redis-11771.c250.eu-central-1-1.ec2.cloud.redislabs.com",
+                port: 11771,
+                password: <string>process.env.REDIS_PASSWORD
+            }
+        }),
         DefaultSearchPlugin.init({ bufferUpdates: false, indexStockStatus: true }),
         EmailPlugin.init({
             devMode: true,
