@@ -37,6 +37,8 @@ export const config: VendureConfig = {
         cookieOptions: {
           secret: process.env.COOKIE_SECRET || 'cookie-secret',
         },
+        tokenMethod: 'bearer', // authorization header method
+        requireVerification: false, // disable register by email verification
     },
     dbConnectionOptions: {
         type: 'postgres',
@@ -66,7 +68,7 @@ export const config: VendureConfig = {
                 },
               }),
         }),
-        BullMQJobQueuePlugin.init({ 
+        BullMQJobQueuePlugin.init({
             connection: {
                 host: "redis-11771.c250.eu-central-1-1.ec2.cloud.redislabs.com",
                 port: 11771,
