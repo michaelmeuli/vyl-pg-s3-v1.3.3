@@ -44,13 +44,13 @@ export const config: VendureConfig = {
         type: 'postgres',
         synchronize: true, // turn this off for production
         logging: false,
-        database: 'jhzfolxj',
-        host: 'abul.db.elephantsql.com',
+        database: <string>process.env.DB_DATABASE,
+        host: <string>process.env.DB_HOST,
         port: 5432,
-        username: 'jhzfolxj',
-        password: <string>process.env.ELEPHANTSQL_PASSWORD,
+        username: <string>process.env.DB_USERNAME,
+        password: <string>process.env.DB_PASSWORD,
         migrations: [path.join(__dirname, '../migrations/*.ts')],
-        extra: { max: 2 }
+        extra: { max: 2 } // limit connections because of ElephantSQL
     },
     paymentOptions: {
         paymentMethodHandlers: [dummyPaymentHandler],
@@ -61,7 +61,7 @@ export const config: VendureConfig = {
             route: 'assets',
             assetUploadDir: path.join(__dirname, '../static/assets'),
             storageStrategyFactory: configureS3AssetStorage({
-                bucket: 'yl-vendure',
+                bucket: <string>process.env.AWS_BUCKET,
                 credentials: {
                   accessKeyId: <string>process.env.AWS_ACCESS_KEY_ID,
                   secretAccessKey: <string>process.env.AWS_SECRET_ACCESS_KEY,
